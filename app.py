@@ -1,33 +1,33 @@
-import cv2 as cv
-import numpy as np
+import cv2
+from ultralytics import YOLO
 
-# initialize MOG2 background subtractor
-bg_subtractor = cv.createBackgroundSubtractorMOG2(detectShadows=True)
+# load YOLOv11
+model = YOLO('yolo11n.pt')
 
-def track_balls(video):
-    cap = cv.VideoCapture(video)
+def detect_balls(video):
+    cap = cv2.VideoCapture(video)
 
     while cap.isOpened():
-        ret, frame = cap.read()
-        if not ret: 
-            print("Can't receive frame (stream end?). Exiting ...")
+        # read a frame from the video
+        success, frame = cap.read()
+
+        if success:
+            # persisting tracks between frames
+            results = model.track(frame, persist=True)
+
+            # visualize the results
+            annotated_frame = results[0].plot()
+
+            # display the annotated frame
+            cv2.imshow("Snooker Ball Tracking", annotated_frame)
+
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+        else:
             break
-
-        # convert to grayscale
-        gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-
-        # apply gaussian blur to reduce noise
-        blur = cv.GaussianBlur(gray, (5, 5), 0)
-
-        # apply background subtractor
-        fg_mask = bg_subtractor.apply(blur)
-
-        cv.imshow('Snooker Ball Tracking', fg_mask)
-
-        if cv.waitKey(1) & 0xFF == ord('q'):
-            break
-
+    
     cap.release()
-    cv.destroyAllWindows()
+    cv2.destroyAllWindows()
 
-track_balls('videos/sample4.mp4')
+
+detect_balls("videos/sample1.mp4")
