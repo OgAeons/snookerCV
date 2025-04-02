@@ -2,7 +2,7 @@ import cv2
 from ultralytics import YOLO
 
 # Load the custom trained model
-model = YOLO('model/snookerCV_v2.pt')
+model = YOLO('model/snookerCV_v3.pt')
 
 def detect_balls(video):
     cap = cv2.VideoCapture(video)
