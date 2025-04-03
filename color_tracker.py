@@ -1,4 +1,5 @@
 import cv2
+import argparse
 import  numpy as np
 from ultralytics import YOLO
 from collections import deque
@@ -6,10 +7,6 @@ from colors import generate_mask
 
 # load the trained YOLO model
 model = YOLO('model/v4_snookerCV.pt')
-
-# select the color to track the balls
-# [ red, orange, blue, green, yellow, black ]
-selected_color = "red"
 
 # color parameters
 ball_color = (0, 255, 0)        # green box around the balls
@@ -49,7 +46,7 @@ def set_ball_id(center):
     return new_id
 
 
-def detect_balls(video):
+def detect_balls(video, selected_color):
     global ball_positions
 
     cap = cv2.VideoCapture(video)
@@ -123,5 +120,10 @@ def detect_balls(video):
     cv2.destroyAllWindows()
 
 
-# run detection on a sample video
-detect_balls("videos/sample2.mp4")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Snooker Ball Tracking")
+    parser.add_argument("color", type=str, help="Color to track [ red, orange, blue, green, yellow, black ]")
+    args = parser.parse_args()
+    
+    selected_color = args.color.lower()
+    detect_balls("videos/sample2.mp4", selected_color)

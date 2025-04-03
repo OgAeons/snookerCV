@@ -1,4 +1,5 @@
 import cv2
+import argparse
 import  numpy as np
 from ultralytics import YOLO
 from collections import deque
@@ -105,5 +106,9 @@ def detect_balls(video):
     cv2.destroyAllWindows()
 
 
-# run detection on a sample video
-detect_balls("videos/sample1.mp4")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Snooker Ball Tracking")
+    parser.add_argument("video", type=str, help="Path to video sample")
+    args = parser.parse_args()
+    
+    detect_balls(args.video)
