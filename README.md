@@ -95,8 +95,8 @@ Select a color from: `red, orange, yellow, green, blue, black`
 
 ## Demonstration Videos
 Videos demonstrating both methods will be added in the README: \
-📌 **Snooker Ball Tracking** (app.py) – *[Video Link]()*  
-📌 **Color-Based Ball Tracking** (color_tracker.py) – *[Video Link]()*  
+📌 **Snooker Ball Tracking** (app.py) – *[Video Link](https://drive.google.com/file/d/1t8Rxve-pYo0wNnOYdbK-ycGoJf7myaH4/view?usp=sharing)*  
+📌 **Color-Based Ball Tracking** (color_tracker.py) – *[Video Link](https://drive.google.com/file/d/1kQm-u7XIN8e5CvZA5EDPAOe_hQiWpUd_/view?usp=sharing)*  
 
 ---
 
