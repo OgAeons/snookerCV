@@ -1,4 +1,9 @@
 venv
+temp.py
+dataset
+dataset/old data
+yolo*.pt
+model/previous-models
 
 .DS_Store
 Thumbs.db
