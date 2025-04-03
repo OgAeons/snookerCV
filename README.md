@@ -22,7 +22,7 @@ Ensure you have Python **3.8 or later** installed. Download it here:
 
 ### 2. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/snookerCV.git
+git clone https://github.com/OgAeons/snookerCV.git
 ```
 
 ### 3. Create a Virtual Environment (Optional but Recommended)
