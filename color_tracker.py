@@ -8,8 +8,8 @@ from colors import generate_mask
 model = YOLO('model/v4_snookerCV.pt')
 
 # select the color to track the balls
-# [ red, orange, blue, green, yellow, pink, brown, black, white ]
-selected_color = "blue"
+# [ red, orange, blue, green, yellow, black, white ]
+selected_color = ""
 
 # color parameters
 ball_color = (0, 255, 0)        # green box around the balls
@@ -18,6 +18,7 @@ trail_color = (255, 255, 255)   # white tails
 # tracking parameters
 trail_length = 15               # max trail length
 max_distance = 50               # max movement distance between balls to avoid ghost trails
+min_mask_per = 0.5             # min percentage of pixels in the mask for detection
 
 # tracking storage
 ball_trails =  {}
@@ -85,28 +86,28 @@ def detect_balls(video):
 
             # check if ball is in color range
             mask_range = mask[y1:y2, x1:x2]
-            # if ball not in color range
-            if cv2.countNonZero(mask_range) == 0:
-                continue
+            mask_area = cv2.countNonZero(mask_range)
+            box_area = (x2 - x1) * (y2 - y1)
 
-            # set unique id for balls
-            ball_id = set_ball_id(center)
-            new_positions[ball_id] = center
+            if box_area > 0 and mask_area / box_area >= min_mask_per:
+                # set unique id for balls
+                ball_id = set_ball_id(center)
+                new_positions[ball_id] = center
 
-            # draw boxes around the balls
-            cv2.rectangle(frame, (x1, y1), (x2, y2), ball_color, 2)
-            cv2.putText(frame, f"Snooker Ball {ball_id}", (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, ball_color, 2)
+                # draw boxes around the balls
+                cv2.rectangle(frame, (x1, y1), (x2, y2), ball_color, 2)
+                cv2.putText(frame, f"Snooker Ball {ball_id}", (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, ball_color, 2)
 
-            # check if ball id exists in ball_trails
-            if ball_id not in ball_trails:
-                ball_trails[ball_id] = deque(maxlen=trail_length)
+                # check if ball id exists in ball_trails
+                if ball_id not in ball_trails:
+                    ball_trails[ball_id] = deque(maxlen=trail_length)
 
-            ball_trails[ball_id].append(center)
+                ball_trails[ball_id].append(center)
 
-            # draw trails for the balls
-            for i in range(1, len(ball_trails[ball_id])):
-                if ball_trails[ball_id][i-1] and ball_trails[ball_id][i]:
-                    cv2.line(frame, ball_trails[ball_id][i-1], ball_trails[ball_id][i], trail_color, 3)
+                # draw trails for the balls
+                for i in range(1, len(ball_trails[ball_id])):
+                    if ball_trails[ball_id][i-1] and ball_trails[ball_id][i]:
+                        cv2.line(frame, ball_trails[ball_id][i-1], ball_trails[ball_id][i], trail_color, 3)
 
         # update positions for the next frame
         ball_positions = new_positions
