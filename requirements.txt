@@ -8,3 +8,4 @@ torchvision==0.21.0
 tqdm==4.67.1
 ultralytics==8.3.99
 requests==2.32.3
+argparse==1.4.0
