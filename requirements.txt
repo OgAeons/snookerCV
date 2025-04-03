@@ -1,0 +1,10 @@
+numpy==2.1.1
+opencv-contrib-python==4.11.0.86
+matplotlib==3.10.1
+pandas==2.2.3
+scipy==1.15.2
+torch==2.6.0
+torchvision==0.21.0
+tqdm==4.67.1
+ultralytics==8.3.99
+requests==2.32.3
