@@ -8,8 +8,8 @@ from colors import generate_mask
 model = YOLO('model/v4_snookerCV.pt')
 
 # select the color to track the balls
-# [ red, orange, blue, green, yellow, black, white ]
-selected_color = ""
+# [ red, orange, blue, green, yellow, black ]
+selected_color = "red"
 
 # color parameters
 ball_color = (0, 255, 0)        # green box around the balls
