@@ -8,9 +8,9 @@ This project is a **computer vision-based solution** designed to track snooker b
 ✅ **Custom-trained YOLOv11 model** for snooker ball detection.  
 ✅ Detects and labels snooker balls with bounding boxes.  
 ✅ Assigns unique IDs to each ball for tracking.  
-✅ Draws movement trails to show the ball's path.   
-✅ Implements **color segmentation** for precise tracking.
-✅ Filters and tracks only selected colored balls. 
+✅ Draws movement trails to show the ball's path. \
+✅ Implements **color segmentation** for precise tracking. \
+✅ Filters and tracks only selected colored balls. \
 ✅ Supports recorded video processing.  
 
 ---
