@@ -76,7 +76,8 @@ python3 app.py videos/sample1.mp4
 or
 ```bash
 python3 app.py videos/sample2.mp4
-```
+``` 
+⚠️ Press ` q ` to exit the video playback.
 
 
 ### **2. Run Color-Specific Snooker Ball Tracking**
@@ -89,7 +90,8 @@ Use `python` (windows) and `python3` (mac)
 ```bash
 python3 color_tracker.py red
 ```
-Select a color from: `red, orange, yellow, green, blue, black`
+Select a color from: `red, orange, yellow, green, blue, black` \
+⚠️ Press ` q ` to exit the video playback.
 
 ---
 
